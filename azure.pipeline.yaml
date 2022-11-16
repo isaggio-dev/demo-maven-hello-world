@@ -12,5 +12,6 @@ steps:
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
     jdkArchitectureOption: 'x64'
+    searchFolder: '$(System.DefaultWorkingDirectory)'    
     publishJUnitResults: true
-    testResultsFiles: '**target/surefire-reports/TEST-*.xml'
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
