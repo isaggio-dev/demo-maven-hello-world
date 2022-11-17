@@ -51,8 +51,9 @@ stages:
                 ls -lsrt
                 ls -lsrt "$(Agent.BuildDirectory)"
                 ls -lsrt /home/vsts/work/1/
-                echo "NOW $(Agent.BuildDirectory)/AppArtifacts"                
-                ls -lsrt "$(Agent.BuildDirectory)/AppArtifacts"
+                echo "NOW Pipeline.Workspace"                                
+                echo "NOW $(Pipeline.Workspace)/AppArtifacts"                
+                ls -lsrt "$(Pipeline.Workspace)/AppArtifacts"
                 echo "Hard Code: /home/vsts/work/1/AppArtifacts"
                 ls -lsrt /home/vsts/work/1/AppArtifacts
           - task: Docker@2
