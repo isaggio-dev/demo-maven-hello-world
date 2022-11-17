@@ -28,7 +28,7 @@ stages:
               jdkArchitectureOption: 'x64'
               publishJUnitResults: true
               testResultsFiles: "**/surefire-reports/TEST-*.xml"
-          - publish: $(Build.SourcesDirectory)
+          - publish: $(Build.SourcesDirectory) # /home/vsts/work/1/s/*
             artifact: AppArtifacts
 
   - stage: Image_Build
@@ -38,7 +38,7 @@ stages:
         displayName: Build and push Docker image
         steps:
           - checkout: none
-          - download: current
+          - download: current # /home/vsts/work/1/AppArtifacts (downloaded)
             artifact: AppArtifacts
             patterns: |
               **/*Dockerfile
@@ -49,18 +49,17 @@ stages:
                 echo "Hello-Inside-CommandLine"
                 pwd
                 ls -lsrt
-                ls -lsrt "$(Agent.BuildDirectory)"
+                ls -lsrt "$(Agent.BuildDirectory)" # /home/vsts/work/1
                 ls -lsrt /home/vsts/work/1/
                 echo "NOW Pipeline.Workspace"                                
-                echo "NOW $(Pipeline.Workspace)/AppArtifacts"                
+                echo "NOW $(Pipeline.Workspace)/AppArtifacts"  # /home/vsts/work/1/AppArtifacts              
                 ls -lsrt "$(Pipeline.Workspace)/AppArtifacts"
                 echo "Hard Code: /home/vsts/work/1/AppArtifacts"
                 ls -lsrt /home/vsts/work/1/AppArtifacts
           - task: Docker@2
-            displayName: Push the Docker image
+            displayName: Build Push Docker image
             inputs:
-              workingDirectory: $(Pipeline.Workspace)/AppArtifacts
-              command: build
+              command: BuildAndPush
               repository: $(imageRepository)
               dockerfile: $(dockerfilePath)
               containerRegistry: $(dockerRegistryServiceConnection)
