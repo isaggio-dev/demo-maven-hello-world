@@ -42,14 +42,14 @@ stages:
             displayName: 'Download Build Artifacts'
             inputs:
               artifactName: AppArtifacts
-              downloadPath: $(System.DefaultWorkingDirectory)
+              downloadPath: $(Agent.BuildDirectory)
           - task: CmdLine@2
             inputs:
               script: |
                 echo "Hello-Inside-CommandLine"
                 pwd
                 ls -lsrt
-                ls -lsrt "$(System.DefaultWorkingDirectory)"
+                ls -lsrt "$(Agent.BuildDirectory)"
                 id
           - task: Docker@2
             displayName: Push the Docker image
