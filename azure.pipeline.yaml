@@ -2,7 +2,7 @@ trigger:
   - master
 variables:
 #Container registry Services Connection established during pipeline creation
-  dockerRegistryServiceConnection: '80a6b8f2-1c45-4912-ac97-e461f605b8fe'
+  dockerRegistryServiceConnection: 'isaggio-tech-registry'
   imageRepository: 'maven-hello-world'
   containerRegistry: 'isaggio.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
