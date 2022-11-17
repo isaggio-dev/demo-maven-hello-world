@@ -43,7 +43,7 @@ stages:
             patterns: |
               **/*Dockerfile
               **/*.jar
-            target: $(Pipeline.Workspace)
+            path: $(Pipeline.Workspace)
           - task: CmdLine@2
             inputs:
               script: |
