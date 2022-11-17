@@ -28,7 +28,7 @@ stages:
               jdkArchitectureOption: 'x64'
               publishJUnitResults: true
               testResultsFiles: "**/surefire-reports/TEST-*.xml"
-          - publish: $(System.DefaultWorkingDirectory)/target/*.jar
+          - publish: $(System.DefaultWorkingDirectory)/target
             artifact: AppJar
 
   - stage: Image_Build
