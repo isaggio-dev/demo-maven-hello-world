@@ -51,8 +51,10 @@ stages:
                 ls -lsrt
                 ls -lsrt "$(Agent.BuildDirectory)"
                 ls -lsrt /home/vsts/work/1/
-                echo "NOW"                
-                ls -lsrt $(Agent.BuildDirectory)/AppArtifacts
+                echo "NOW $(Agent.BuildDirectory)/AppArtifacts"                
+                ls -lsrt "$(Agent.BuildDirectory)/AppArtifacts"
+                echo "Hard Code: /home/vsts/work/1/AppArtifacts"
+                ls -lsrt /home/vsts/work/1/AppArtifacts
           - task: Docker@2
             displayName: Push the Docker image
             inputs:
