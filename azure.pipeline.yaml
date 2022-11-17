@@ -39,9 +39,14 @@ stages:
         steps:
           - download: current
             artifact: target
-          - script: dir
-            workingDirectory: $(Agent.BuildDirectory)
-          - task: Docker@2
+        - task: CmdLine@2
+          inputs:
+            script: |
+              echo "Hello-Inside-CommandLine"
+              pwd
+              ls -lsrt
+              id
+        - task: Docker@2
             displayName: 'Push the Docker image to container registry'
             inputs:
               command: build
