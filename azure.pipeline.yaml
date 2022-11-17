@@ -11,11 +11,11 @@ variables:
 pool:
   vmImage: 'ubuntu-latest'
 stages:
-  - stage: Maven-Build
+  - stage: Maven_Build
     displayName: Maven Build
     jobs:
       - job: Build
-        displayName: Maven-Build
+        displayName: Maven Build
         pool:
           vmImage: 'ubuntu-latest'
         steps:
@@ -29,7 +29,7 @@ stages:
               publishJUnitResults: true
               testResultsFiles: "**/surefire-reports/TEST-*.xml"
 
-  - stage: Runtime-Image
+  - stage: Runtime_Image
     displayName: Build image
     jobs:
       - job: Docker Push
