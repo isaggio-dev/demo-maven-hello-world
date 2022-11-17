@@ -52,11 +52,11 @@ stages:
                 ls -lsrt "$(Agent.BuildDirectory)"
                 ls -lsrt /home/vsts/work/1/
                 echo "NOW"                
-                ls -lsrt $(Agent.BuildDirectory)/target
+                ls -lsrt $(Agent.BuildDirectory)/AppArtifacts
           - task: Docker@2
             displayName: Push the Docker image
             inputs:
-              workingDirectory: $(Pipeline.Workspace)
+              workingDirectory: $(Pipeline.Workspace)/AppArtifacts
               command: build
               repository: $(imageRepository)
               dockerfile: $(dockerfilePath)
