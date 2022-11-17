@@ -39,6 +39,8 @@ stages:
         steps:
           - download: current
             artifact: target
+          - script: dir
+            workingDirectory: $(Agent.BuildDirectory)
           - task: Docker@2
             displayName: 'Push the Docker image to container registry'
             inputs:
