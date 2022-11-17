@@ -1,16 +1,58 @@
 trigger:
   - master
 
+resources:
+  - repo:self
+
+variables:
+#Container registry Services Connection established during pipeline creation
+  dockerRegistryServiceConnection: '80a6b8f2-1c45-4912-ac97-e461f605b8fe'
+  imageRepository: 'maven-hello-world'
+  containerRegistry: 'isaggio.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  tag: '$(Build.BuildId)'
+
 pool:
   vmImage: 'ubuntu-latest'
+stages:
+  - stage: Maven-Build
+    displayName: Maven Build
+    jobs:
+      - job: Build
+        displayName: Maven-Build
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - task: Maven@3
+            inputs:
+              mavenPomFile: 'pom.xml'
+              mavenOptions: '-Xmx3072m'
+              javaHomeOption: 'JDKVersion'
+              jdkVersionOption: '1.8'
+              jdkArchitectureOption: 'x64'
+              publishJUnitResults: true
+              testResultsFiles: "**/surefire-reports/TEST-*.xml"
 
-steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: "**/surefire-reports/TEST-*.xml"
+  - stage: Runtime-Image
+    displayName: Build image
+    jobs:
+      - job: Docker Push
+        displayName: Build and push Docker image
+        steps:
+          - task: Docker@2
+            displayName: 'Push the Docker image to container registry'
+            inputs:
+              command: BuildAndPush
+              repository: $(imageRepository)
+              dockerfile: $(dockerfilePath)
+              containerRegistry: $(dockerRegistryServiceConnection)
+              tags: $(tag)
+
+
+
+
+
+
+
+
+
