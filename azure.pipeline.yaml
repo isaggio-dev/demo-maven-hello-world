@@ -28,8 +28,8 @@ stages:
               jdkArchitectureOption: 'x64'
               publishJUnitResults: true
               testResultsFiles: "**/surefire-reports/TEST-*.xml"
-          - publish: $(System.DefaultWorkingDirectory)/target
-            artifact: target
+          - publish: $(System.DefaultWorkingDirectory)
+            artifact: AppArtifacts
 
   - stage: Image_Build
     displayName: Build image
@@ -38,14 +38,18 @@ stages:
         displayName: Build and push Docker image
         steps:
           - checkout: none
-          - download: current
-            artifact: target
+          - task: DownloadBuildArtifacts@0
+            displayName: 'Download Build Artifacts'
+            inputs:
+              artifactName: AppArtifacts
+              downloadPath: $(System.DefaultWorkingDirectory)
           - task: CmdLine@2
             inputs:
               script: |
                 echo "Hello-Inside-CommandLine"
                 pwd
                 ls -lsrt
+                ls -lsrt "$(System.DefaultWorkingDirectory)"
                 id
           - task: Docker@2
             displayName: Push the Docker image
