@@ -38,11 +38,13 @@ stages:
         displayName: Build and push Docker image
         steps:
           - checkout: none
-          - task: DownloadBuildArtifacts@0
+          - task: DownloadPipelineArtifact@2
             displayName: 'Download Build Artifacts'
             inputs:
-              artifactName: AppArtifacts
-              downloadPath: $(Agent.BuildDirectory)
+              artifact: AppArtifacts
+              patterns: |
+                **/*Dockerfile
+                **/*.jar
           - task: CmdLine@2
             inputs:
               script: |
