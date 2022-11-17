@@ -29,7 +29,7 @@ stages:
               publishJUnitResults: true
               testResultsFiles: "**/surefire-reports/TEST-*.xml"
           - publish: $(System.DefaultWorkingDirectory)/target
-            artifact: AppJar
+            artifact: target
 
   - stage: Image_Build
     displayName: Build image
