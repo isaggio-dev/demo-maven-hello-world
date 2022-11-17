@@ -37,6 +37,7 @@ stages:
       - job: Build
         displayName: Build and push Docker image
         steps:
+          - checkout: none
           - download: current
             artifact: target
           - task: CmdLine@2
