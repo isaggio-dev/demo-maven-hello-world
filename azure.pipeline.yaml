@@ -29,7 +29,7 @@ stages:
               publishJUnitResults: true
               testResultsFiles: "**/surefire-reports/TEST-*.xml"
 
-  - stage: Runtime_Image
+  - stage: Image_Build
     displayName: Build image
     jobs:
       - job: Docker Push
