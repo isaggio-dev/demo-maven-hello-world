@@ -5,7 +5,7 @@ variables:
   dockerRegistryServiceConnection: 'isaggio-tech-registry'
   imageRepository: 'maven-hello-world'
   containerRegistry: 'isaggio.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  dockerfilePath: 'Dockerfile'
   tag: '$(Build.BuildId)'
 
 pool:
