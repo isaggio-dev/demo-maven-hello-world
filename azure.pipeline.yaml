@@ -28,7 +28,7 @@ stages:
               jdkArchitectureOption: 'x64'
               publishJUnitResults: true
               testResultsFiles: "**/surefire-reports/TEST-*.xml"
-          - publish: $(Pipeline.Workspace)
+          - publish: $(Build.SourcesDirectory)
             artifact: AppArtifacts
 
   - stage: Image_Build
