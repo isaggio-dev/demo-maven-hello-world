@@ -1,3 +1,9 @@
+
+# What we Assume
+# Every Task/Step Starts inside "/home/vsts/work/1/s" which is $(Build.SourcesDirectory)
+# For Docker Task, dockerfile input is important where the Docker file is located - which acts as home path
+# Ex: COPY ./target/hello-world-app-0.0.1-SNAPSHOT.jar /home/hello-world-app.jar
+
 trigger:
   - master
 variables:
@@ -52,10 +58,7 @@ stages:
                 ls -lsrt "$(Agent.BuildDirectory)" # /home/vsts/work/1
                 ls -lsrt /home/vsts/work/1/
                 echo "NOW Pipeline.Workspace"                                
-                echo "NOW $(Pipeline.Workspace)/AppArtifacts"  # /home/vsts/work/1/AppArtifacts              
-                ls -lsrt "$(Pipeline.Workspace)/AppArtifacts"
-                echo "Hard Code: /home/vsts/work/1/AppArtifacts"
-                ls -lsrt /home/vsts/work/1/AppArtifacts
+                echo "NOW $(Pipeline.Workspace)/AppArtifacts"  # /home/vsts/work/1/AppArtifacts
           - task: Docker@2
             displayName: Build Push Docker image
             inputs:
@@ -67,12 +70,6 @@ stages:
                 $(tag)
                 latest
 #              arguments: '--build-arg ubuntu_version=$(Pipeline.Workspace)/jars/'
-
-
-
-
-
-
 
 
 
