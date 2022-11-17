@@ -39,7 +39,7 @@ stages:
         displayName: Build and push Docker image
         steps:
           - checkout: none
-          - download:
+          - download: current
             artifact: AppArtifacts
             patterns: |
               **/*Dockerfile
