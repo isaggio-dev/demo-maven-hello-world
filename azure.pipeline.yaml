@@ -53,10 +53,9 @@ stages:
                 ls -lsrt
                 ls -lsrt "$(Agent.BuildDirectory)"
                 ls -lsrt /home/vsts/work/1/
-                ls -lsrt /home/vsts/work/1/a
-                ls -lsrt /home/vsts/work/1/b
                 id
           - task: Docker@2
+            workingDirectory: $(Agent.BuildDirectory)/target
             displayName: Push the Docker image
             inputs:
               command: build
