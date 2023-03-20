@@ -1,7 +1,5 @@
 pipeline {
-   agent {
-    any
-   } 
+   agent any 
    # agent {
    #     docker {
    #         image 'maven:csanchez/maven:3-eclipse-temurin-11'
