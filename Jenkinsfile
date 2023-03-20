@@ -1,9 +1,12 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.9.0-eclipse-temurin-8-alpine'
-        }
-    }
+   agent {
+    any
+   } 
+   # agent {
+   #     docker {
+   #         image 'maven:csanchez/maven:3-eclipse-temurin-11'
+   #     }
+   # }
     stages {
         stage('version') {
             steps {
