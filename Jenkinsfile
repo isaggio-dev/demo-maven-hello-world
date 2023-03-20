@@ -1,10 +1,5 @@
 pipeline {
    agent any 
-   # agent {
-   #     docker {
-   #         image 'maven:csanchez/maven:3-eclipse-temurin-11'
-   #     }
-   # }
     stages {
         stage('version') {
             steps {
