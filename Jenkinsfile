@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.9.0-eclipse-temurin-8-alpine'
-        }
-    }
+   agent any 
     stages {
         stage('version') {
             steps {
@@ -25,6 +21,11 @@ pipeline {
                 }
             }
         }
+        stage('Docker-Build') {
+            steps {
+                sh 'docker build -t demo-maven:v0.1'
+            }
+        }        
     }
 }
 
