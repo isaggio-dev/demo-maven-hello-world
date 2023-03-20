@@ -25,6 +25,11 @@ pipeline {
                 }
             }
         }
+        stage('Docker-Build') {
+            steps {
+                sh 'docker build -t demo-maven:v0.1'
+            }
+        }        
     }
 }
 
